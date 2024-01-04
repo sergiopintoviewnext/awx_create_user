@@ -26,6 +26,7 @@
         controller_username: "{{ controller_username }}"
         controller_password: "{{ controller_password }}"
         superuser: true
+        validate_certs: false        
         state: present
 
     - name: Añadir usuario a team
@@ -36,6 +37,7 @@
         controller_host: "{{ controller_host }}"
         controller_username: "{{ controller_username }}"
         controller_password: "{{ controller_password }}"
+        validate_certs: false        
         state: present
 
 ...
