@@ -1,6 +1,6 @@
 ---
 
-- name: Crear usuario y añadirlo a team viewnext
+- name: Crear usuario y añadirlo a organizacion
   hosts: localhost
   vars:
     username: usuario
@@ -8,11 +8,10 @@
     email: usuario@example.com
     first_name: usuario
     last_name: usuario_last_name
-    organization: organization1
-    team: team1
+    organization: organization_name
     controller_host: http://1.1.1.1
     controller_username: admin
-    controller_password: 1234
+    controller_password: 1234password
   tasks:
     - name: Crear usuario en organizacion
       awx.awx.user:
@@ -25,19 +24,17 @@
         controller_host: "{{ controller_host }}"
         controller_username: "{{ controller_username }}"
         controller_password: "{{ controller_password }}"
-        superuser: true
-        validate_certs: false        
+        superuser: false
         state: present
 
-    - name: Añadir usuario a team
+    - name: Añadir usuario como admin de organizacion
       awx.awx.role:
-        user: "{{ username }}"
-        target_team: "{{ team }}"
-        role: member
+        user: "{{ username }}"        
+        role: admin
+        organization: "{{ organization }}"        
         controller_host: "{{ controller_host }}"
         controller_username: "{{ controller_username }}"
         controller_password: "{{ controller_password }}"
-        validate_certs: false        
         state: present
 
 ...
